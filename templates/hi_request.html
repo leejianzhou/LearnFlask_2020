@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hi-Request
+{% endblock %}
+
+{% block content %}
+    <h1>Request属性</h1>
+    <ul>
+        <li>path：{{ request.path }}</li>
+        <li>full_path：{{ request.full_path }}</li>
+        <li>host：{{ request.host }}</li>
+        <li>host_url：{{ request.host_url }}</li>
+        <li>base_url：{{ request.base_url }}</li>
+        <li>url：{{ request.url }}</li>
+        <li>url_root：{{ request.url_root }}</li>
+    </ul>
+{% endblock %}
