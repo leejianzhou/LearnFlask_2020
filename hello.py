@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return 'Hello World！!'
 
 
 @app.route('/hi')
@@ -19,6 +19,11 @@ def say_hello():
 def greet(name='Peter'):
     return '<h1>Hello, %s!</h1>' % name
 
+@app.route('/getrequest')
+def getrequest():
+    ##以http://127.0.0.1:8080/getrequest?name=Grey
+    name=request.args.get('name','Flask')
+    return '<h1>Hello, %s!<h1>' % name
 
 if __name__ == '__main__':
     app.run()
