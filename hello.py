@@ -38,8 +38,9 @@ def three_colors(color):
 
 @app.route('/foo')
 def foo():
-    response = make_response('Hello, text/plain')
-    response.mimetype = 'text/plain'
+    response = make_response('<h1>Hello, text/plain</h1>')
+    #response.mimetype = 'text/plain'
+    response.headers['Content-Type'] = 'text/html; charset=utf-8'
     return response
 
 
