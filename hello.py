@@ -42,5 +42,6 @@ def foo():
     response.mimetype = 'text/plain'
     return response
 
+
 if __name__ == '__main__':
     app.run()
