@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from flask import make_response
 
 app = Flask(__name__)
 
@@ -28,6 +29,18 @@ def getrequest():
 @app.route('/goback/<int:year>')
 def go_back(year):
     return '<p> 出生年：%d </p>' % (2020-year)
+
+colors = ['blue', 'white', 'black']
+
+@app.route('/colors/<any(%s):color>' % str(colors)[1:-1])
+def three_colors(color):
+    return '<p>You select the color is %s. ' % color
+
+@app.route('/foo')
+def foo():
+    response = make_response('Hello, text/plain')
+    response.mimetype = 'text/plain'
+    return response
 
 if __name__ == '__main__':
     app.run()
