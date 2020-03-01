@@ -1,10 +1,13 @@
 from flask import Flask, request, render_template, jsonify
-from flask import make_response, redirect, url_for, session
+from flask import make_response, redirect, url_for, session, current_app
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv('SECRET_KEY', 'a1b2c3d4')
 
+@app.before_first_request
+def get_name():
+    current_app.name = 'Myapp'
 
 @app.route('/')
 def index():
@@ -14,6 +17,14 @@ def index():
 def login():
     session['logged_in'] = True  #写入session
     return redirect(url_for('hello'))
+
+@app.route('/logout')
+def logout():
+    if 'logged_in' in session:
+        session.pop('logged_in')
+    return redirect(url_for('hello'))
+
+
 
 @app.route('/set/<name>')
 def set_cookie(name):
@@ -35,9 +46,9 @@ def hello():
 
     return response
 
-@app.route('/hi', methods=['GET', 'POST'])
+@app.route('/hi')
 def say_hello():
-    return render_template('hi_request.html')
+    return 'Hello, %s' % current_app.name
 
 
 @app.route('/greet')
